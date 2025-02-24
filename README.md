@@ -2,28 +2,29 @@
 > 당신의 이야기를 기다립니다.
 >
 > 퇴직자를 위한 자서전 편찬 커뮤니티 플랫폼
-
-![Image](https://github.com/user-attachments/assets/d28ab813-58bb-4f9a-90ae-4342980d631d)
-
-
-
-## 🖼️ 프로젝트 기획 배경
-
+![오프닝](https://github.com/user-attachments/assets/3737d91b-2f0b-418d-995f-3b1fb58f44ac)
 
 --- 
 
 ## 🎯 핵심 기능
 
+### 사용자를 위한 온보딩 제공
+<img src="https://github.com/user-attachments/assets/2f9300fb-b511-4a8b-b9f4-1cc29ae54fe1" width="70%">
+
 ### AI 자서전 편찬 기능
-![Image](https://github.com/user-attachments/assets/5604f85c-1c07-4e06-8cac-6515b09d5ca6)
+<img src="https://github.com/user-attachments/assets/88aa4fcc-cbc8-4887-b846-f390dcac0fb8" width="70%">
+
 ### 커스터마이징 가능한 자서전 뷰어 기능
-![Image](https://github.com/user-attachments/assets/dd05b0d1-d3be-47ab-b53d-ed669c3660cb)
+<img src="https://github.com/user-attachments/assets/39145ae2-e334-4f11-a8d8-583097b3f202" width="70%">
+
 ### 엘라스틱 서치와 레디스를 활용한 검색 기능
-![Image](https://github.com/user-attachments/assets/c7f62123-dea9-489a-a10d-2eb631cba750)
+<img src="https://github.com/user-attachments/assets/2c0735ff-d6f1-40e0-94eb-54fa3b5a1f3c" width="70%">
+
 ### 커뮤니티 기능
-![Image](https://github.com/user-attachments/assets/dc0bfa5d-a431-4999-9abe-7154eebe1acc)
+<img src="https://github.com/user-attachments/assets/ea9b46e9-8425-4284-9cfb-fde66c20b35e" width="70%">
+
 ### 챌린지 및 소통 기능
-![Image](https://github.com/user-attachments/assets/e261c4e1-a4ed-4548-9094-b353bf277209)
+<img src="https://github.com/user-attachments/assets/cd49c05c-48b4-4e23-aae0-3a61dbb31c42" width="70%">
 ---
 ## 🚀 기술 스택
 
