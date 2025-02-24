@@ -25,7 +25,9 @@
 
 ### 챌린지 및 소통 기능
 <img src="https://github.com/user-attachments/assets/cd49c05c-48b4-4e23-aae0-3a61dbb31c42" width="30%">
+
 ---
+
 ## 🚀 기술 스택
 
 ### 🖥️ Backend & DevOps
