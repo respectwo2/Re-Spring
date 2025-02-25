@@ -160,7 +160,7 @@ public class ChallengeService {
                             ch.getDescription(),
                             imageService.getSingleImageByEntity(ImageType.CHALLENGE, ch.getId()),
                             ch.getRegisterDate(),
-                            isParticipating, // ✅ 사용자 참가 여부 추가
+                            isParticipating, //  사용자 참가 여부 추가
                             tagRepository.findTagsByChallengeId(ch.getId()).stream().collect(Collectors.toSet()),
                             isLiked,
                             ch.getLikes(),
@@ -525,7 +525,7 @@ public class ChallengeService {
                             ch.getDescription(),
                             imageService.getSingleImageByEntity(ImageType.CHALLENGE, ch.getId()),
                             ch.getRegisterDate(),
-                            isParticipating, // ✅ 사용자 참가 여부 추가
+                            isParticipating, //  사용자 참가 여부 추가
                             tagRepository.findTagsByChallengeId(ch.getId()).stream().collect(Collectors.toSet()),
                             isLiked,
                             ch.getLikes(),

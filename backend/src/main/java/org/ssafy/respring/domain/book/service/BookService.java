@@ -429,10 +429,10 @@ public class BookService {
                 .index(BOOK_INDEX)
                 .query(q -> q
                         .bool(b -> b
-                                .should(s1 -> s1.matchPhrasePrefix(mpp -> mpp  // ✅ 정확한 순서 자동완성
+                                .should(s1 -> s1.matchPhrasePrefix(mpp -> mpp  //  정확한 순서 자동완성
                                         .field("title")
                                         .query(prefix)))
-                                .should(s2 -> s2.term(t -> t  // ✅ 완전 일치 검색
+                                .should(s2 -> s2.term(t -> t  //  완전 일치 검색
                                         .field("title.keyword")
                                         .value(prefix)))
                         )
@@ -469,10 +469,10 @@ public class BookService {
                 .index(BOOK_INDEX)
                 .query(q -> q
                         .bool(b -> b
-                                .should(s1 -> s1.matchPhrase(m -> m  // ✅ 정확한 순서 검색
+                                .should(s1 -> s1.matchPhrase(m -> m  //  정확한 순서 검색
                                         .field("title")
                                         .query(keyword)))
-                                .should(s2 -> s2.term(t -> t  // ✅ 완전 일치 검색
+                                .should(s2 -> s2.term(t -> t  //  완전 일치 검색
                                         .field("title.keyword")
                                         .value(keyword)))
                         )
@@ -498,44 +498,6 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
-
-//	@Transactional
-//	public List<BookResponseDto> searchByBookTitle(String keyword, UUID userId) throws IOException {
-//		SearchRequest searchRequest = SearchRequest.of(s -> s
-//				.index(BOOK_INDEX)
-//				.query(q -> q
-//						.bool(b -> b
-//								.should(s1 -> s1.matchPhrase(m -> m  // ✅ 정확한 순서 검색 (색인된 형태와 동일해야 검색됨)
-//										.field("title")
-//										.query(keyword)))
-//								.should(s2 -> s2.match(m -> m  // ✅ 부분 포함 검색 (일부 단어만 포함해도 검색 가능)
-//										.field("title")
-//										.query(keyword)
-//										.minimumShouldMatch("75%")))
-//								.should(s3 -> s3.wildcard(w -> w  // ✅ 와일드카드 검색 (완전히 포함된 경우도 검색)
-//										.field("title.keyword")
-//										.value("*" + keyword + "*")))
-//						)
-//				)
-//				.size(10) // 검색 결과 개수 제한
-//		);
-//
-//		SearchResponse<Map> searchResponse = esClient.search(searchRequest, Map.class);
-//		return searchResponse.hits().hits().stream()
-//				.map(hit -> {
-//					try {
-//						BookResponseDto bookDto = objectMapper.convertValue(hit.source(), BookResponseDto.class);
-//						if (bookDto.getId() == null) {
-//							bookDto.setId(Long.parseLong(hit.id())); // Elasticsearch에서 ID 가져오기
-//						}
-//						return enrichBookResponseWithDB(bookDto, userId);
-//					} catch (Exception e) {
-//						return null;
-//					}
-//				})
-//				.filter(Objects::nonNull)
-//				.collect(Collectors.toList());
-//	}
 
 
     // Elasticsearch에서 가져온 데이터에 DB 데이터 추가

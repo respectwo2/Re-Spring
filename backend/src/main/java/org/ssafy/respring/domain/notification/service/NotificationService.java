@@ -95,7 +95,7 @@ public class NotificationService {
             notification.setRead(true);
             notificationRepository.save(notification);
 
-            // ✅ SSE에 구독된 사용자에게만 알림 전송
+            //  SSE에 구독된 사용자에게만 알림 전송
             if (sseService.isUserSubscribed(userId)) {
                 sseService.sendNotification(userId, toDto(notification));
             }
