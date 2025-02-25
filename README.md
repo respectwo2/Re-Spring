@@ -1,4 +1,4 @@
-## 다시, 봄(Re: Spring)
+##  🌿 다시, 봄(Re: Spring)
 > 당신의 이야기를 기다립니다.
 >
 > 퇴직자를 위한 자서전 편찬 커뮤니티 플랫폼
@@ -8,23 +8,26 @@
 
 ## 🎯 핵심 기능
 
-### 사용자를 위한 온보딩 제공
+
+#### 👶 사용자를 위한 온보딩 제공
 <img src="https://github.com/user-attachments/assets/2f9300fb-b511-4a8b-b9f4-1cc29ae54fe1" width="30%">
 
-### AI 자서전 편찬 기능
+#### 📖 AI 자서전 편찬 기능
 <img src="https://github.com/user-attachments/assets/88aa4fcc-cbc8-4887-b846-f390dcac0fb8" width="30%">
 
-### 커스터마이징 가능한 자서전 뷰어 기능
+#### 🧐 커스터마이징 가능한 자서전 뷰어 기능
 <img src="https://github.com/user-attachments/assets/39145ae2-e334-4f11-a8d8-583097b3f202" width="30%">
 
-### 엘라스틱 서치와 레디스를 활용한 검색 기능
-<img src="https://github.com/user-attachments/assets/2c0735ff-d6f1-40e0-94eb-54fa3b5a1f3c" width="40%">
+#### ⌨️ 엘라스틱 서치와 레디스를 활용한 검색 기능
+<img src="https://github.com/user-attachments/assets/a2aa2907-2e60-40c5-9282-dee9aae84db0" width="50%">
 
-### 커뮤니티 기능
+#### 🏫 커뮤니티 기능
 <img src="https://github.com/user-attachments/assets/ea9b46e9-8425-4284-9cfb-fde66c20b35e" width="30%">
 
-### 챌린지 및 소통 기능
+#### 🏊 챌린지 및 소통 기능
 <img src="https://github.com/user-attachments/assets/cd49c05c-48b4-4e23-aae0-3a61dbb31c42" width="30%">
+
+
 
 ---
 
@@ -66,7 +69,7 @@
 
 ---
 
-# 🏗️ Our Team
+# 🏗️ 팀 소개
 
 [📒 팀 노션](https://www.notion.so/Re-Spring-1704ec08d1a9804d951bda76eefbeb8a)
 
