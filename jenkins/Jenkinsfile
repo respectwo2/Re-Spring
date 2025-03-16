@@ -5,6 +5,7 @@ pipeline {
         nodejs 'NodeJS-20'
     }
     environment {
+        BRANCH_NAME = "${env.BRANCH_NAME ?: env.GIT_BRANCH}"
         SPRING_DATASOURCE_URL = credentials('SPRING_DATASOURCE_URL')
         SPRING_DATASOURCE_USERNAME = credentials('SPRING_DATASOURCE_USERNAME')
         SPRING_DATASOURCE_PASSWORD = credentials('SPRING_DATASOURCE_PASSWORD')
@@ -16,49 +17,106 @@ pipeline {
         REDIS_HOST = credentials('REDIS_HOST')
         REDIS_PORT = credentials('REDIS_PORT')
         REDIS_PASSWORD = credentials('REDIS_PASSWORD')
-        S3_BUCKET= credentials('S3_BUCKET')
+        S3_BUCKET = credentials('S3_BUCKET')
         S3_ACCESSKEY = credentials('S3_ACCESSKEY')
         S3_SECRETKEY = credentials('S3_SECRETKEY')
         S3_REGION = credentials('S3_REGION')
-        GOOGLE_CLIENT_ID = credentials('GOOGLE_CLIENT_ID')
-        GOOGLE_CLIENT_SECRET = credentials('GOOGLE_CLIENT_SECRET')
-        GOOGLE_REDIRECT_URI = credentials('GOOGLE_REDIRECT_URI')
-        KAKAO_CLIENT_ID = credentials('KAKAO_CLIENT_ID')
-        KAKAO_CLIENT_SECRET = credentials('KAKAO_CLIENT_SECRET')
-        KAKAO_REDIRECT_URI = credentials('KAKAO_REDIRECT_URI')
         NEXT_PUBLIC_API_BASE_URL = credentials('NEXT_PUBLIC_API_BASE_URL')
-        MEDIASOUP_SERVER = credentials('MEDIASOUP_SERVER')
-        MEDIASOUP_ANNOUNCED_IP = credentials('MEDIASOUP_ANNOUNCED_IP')
     }
     stages {
-        stage('Backend Build') {
-            steps {
-                dir('backend') {
-                    sh 'chmod +x ./gradlew'
-                    sh './gradlew clean build'
-                }
-            }
-        }
-        stage('Frontend Build') {
-            steps {
-                dir('frontend') {
-                    sh '''
-                    npm install
-                    npm run build
-                    '''
-                }
-            }
-        }
-        stage('Docker Compose (Test)') {
+        stage('Checkout') {
             steps {
                 script {
+                    echo "현재 브랜치: ${BRANCH_NAME}"
+                    checkout scm
+                }
+            }
+        }
+
+        stage('Build & Test') {
+            when {
+                expression { BRANCH_NAME == 'main' }
+            }
+            steps {
+                parallel (
+                    backendBuild: {
+                        dir('backend') {
+                            sh 'chmod +x ./gradlew'
+                            sh './gradlew clean build'
+                        }
+                    },
+                    frontendBuild: {
+                        dir('frontend') {
+                            sh 'npm install'
+                            sh 'npm run build'
+                        }
+                    }
+                )
+            }
+        }
+
+        stage('Build & Push Docker Images') {
+            when {
+                expression { BRANCH_NAME == 'deploy' }
+            }
+            steps {
+                withDockerRegistry([credentialsId: 'docker-hub-credentials']) {
+                    parallel (
+                        backendPush: {
+                            sh '''
+                            docker build -t ${DOCKER_USERNAME}/myapp-backend:latest ./backend
+                            docker push ${DOCKER_USERNAME}/myapp-backend:latest
+                            '''
+                        },
+                        frontendPush: {
+                            sh '''
+                            docker build -t ${DOCKER_USERNAME}/myapp-frontend:latest ./frontend
+                            docker push ${DOCKER_USERNAME}/myapp-frontend:latest
+                            '''
+                        }
+                    )
+                }
+            }
+        }
+
+        stage('Deploy Backend') {
+            when {
+                expression { BRANCH_NAME == 'deploy' }
+            }
+            steps {
+                sshagent(['deploy-server-credentials']) {
                     sh '''
-                    docker-compose up -d --build --no-deps backend frontend
+                    ssh user@server "
+                        docker pull ${DOCKER_USERNAME}/myapp-backend:latest && \
+                        docker-compose -f docker-compose.yml up -d --no-recreate backend && \
+                        docker image prune -f
+                    "
                     '''
                 }
             }
         }
+
+        stage('Deploy Frontend') {
+            when {
+                expression { BRANCH_NAME == 'deploy' }
+            }
+            steps {
+                sshagent(['deploy-server-credentials']) {
+                    sh '''
+                    ssh user@server "
+                        docker pull ${DOCKER_USERNAME}/myapp-frontend:latest && \
+                        docker-compose -f docker-compose.yml up -d --no-recreate frontend && \
+                        docker image prune -f
+                    "
+                    '''
+                }
+            }
+        }
+
         stage('Check Running Containers') {
+            when {
+                expression { BRANCH_NAME == 'deploy' }
+            }
             steps {
                 script {
                     sh 'docker ps -a'
@@ -69,9 +127,7 @@ pipeline {
     post {
         always {
             script {
-                sh '''
-                docker-compose down || true
-                '''
+                sh 'docker system prune -f'
             }
         }
     }
