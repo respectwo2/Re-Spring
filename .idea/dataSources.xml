@@ -16,7 +16,7 @@
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
     <data-source source="LOCAL" name="respring@i12a307.p.ssafy.io [2]" uuid="3d6773e8-c586-46f6-a000-0190c35adf2c">
-      <driver-ref>mongo.4</driver-ref>
+      <driver-ref>mongo</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
       <jdbc-url>mongodb://i12a307.p.ssafy.io:27017/respring</jdbc-url>
