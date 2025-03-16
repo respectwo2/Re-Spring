@@ -4,9 +4,22 @@
 > 퇴직자를 위한 자서전 편찬 커뮤니티 플랫폼
 ![오프닝](https://github.com/user-attachments/assets/3737d91b-2f0b-418d-995f-3b1fb58f44ac)
 
+
+## 진행 기간
+- 2025.01.13 ~ 2025.02.21
+
+## 🛠️ 역할 및 기여
+
+### ✅ 프로젝트 전반 아키텍처 설계
+- 전체 서비스의 **아키텍처 설계 및 백엔드 인프라 구축**
+
+### ✅ CI/CD 구축 (Docker + Jenkins)
+- **Jenkins + Docker Compose**를 활용하여 **자동 배포 시스템 구축**
+- Jenkins를 사용하여 **코드 푸시 시 자동 빌드 & 배포**
+
 --- 
 
-## 🎯 핵심 기능
+## 🎯 사용자 핵심 기능
 
 
 #### 👶 사용자를 위한 온보딩 제공
@@ -17,9 +30,6 @@
 
 #### 🧐 커스터마이징 가능한 자서전 뷰어 기능
 <img src="https://github.com/user-attachments/assets/39145ae2-e334-4f11-a8d8-583097b3f202" width="30%">
-
-#### ⌨️ 엘라스틱 서치와 레디스를 활용한 검색 기능
-<img src="https://github.com/user-attachments/assets/a2aa2907-2e60-40c5-9282-dee9aae84db0" width="50%">
 
 #### 🏫 커뮤니티 기능
 <img src="https://github.com/user-attachments/assets/ea9b46e9-8425-4284-9cfb-fde66c20b35e" width="30%">
@@ -79,3 +89,4 @@
 | <img src="https://github.com/respectwo2.png" width="100"> | <img src="https://github.com/MovieGoers.png" width="100"> | <img src="https://github.com/SeungYeopp.png" width="100"> | <img src="https://github.com/seul1230.png" width="100"> | <img src="https://github.com/taehanyoon.png" width="100"> | <img src="https://github.com/Hyeseong128.png" width="100"> |
 |                      **INFRA / BE**                       |                          **FE**                           |                          **BE**                           |                         **BE**                          |                           **FE**                           |                           **FE**                           |
 |       [@respectwo2](https://github.com/respectwo2)        |       [@MovieGoers](https://github.com/MovieGoers)        |       [@SeungYeopp](https://github.com/SeungYeopp)        |        [@seul1230](https://github.com/seul1230)         |        [@taehanyoon](https://github.com/taehanyoon)        |       [@Hyeseong128](https://github.com/Hyeseong128)       |
+
