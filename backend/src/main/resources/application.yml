@@ -19,6 +19,9 @@ spring:
     password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  session:
+    store-type: redis
+
   data:
     mongodb:
       database: ${MONGODB_DATABASE}
@@ -28,6 +31,7 @@ spring:
       host: ${REDIS_HOST}
       port: ${REDIS_PORT}
       password: ${REDIS_PASSWORD}
+      database: 0
 
 
   ai:
@@ -96,6 +100,9 @@ logging:
           connections:
             pooling: ERROR
 
+file:
+  upload-dir: ${FILE_UPLOAD_DIR:${user.home}/uploads}
+
 management:
   endpoints:
     web:
@@ -116,9 +123,3 @@ cloud:
       access-key: ${S3_ACCESSKEY}
       secret-key: ${S3_SECRETKEY}
 
----
-spring:
-  config:
-    import: optional:file:.env[.properties]
-    activate:
-      on-profile: local
