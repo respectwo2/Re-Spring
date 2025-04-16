@@ -24,12 +24,11 @@ public class AuthController {
 
     @Operation(summary = "일반 로그인", description = "세션을 활용한 일반 로그인 기능")
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody LoginRequestDto loginRequestDto, HttpSession session)
-            throws AuthenticationFailedException {
+    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto, HttpSession session) throws AuthenticationFailedException {
         LoginResponseDto loginResponseDto = authService.loginUser(loginRequestDto);
         session.setAttribute("userId", loginResponseDto.getUserId());
         session.setAttribute("userNickname", loginResponseDto.getUserNickname());
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.ok(loginResponseDto);
     }
 
     @Operation(summary = "로그아웃", description = "세션을 만료시키는 로그아웃 기능")

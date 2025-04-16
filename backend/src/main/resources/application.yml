@@ -19,6 +19,9 @@ spring:
     password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  session:
+    store-type: redis
+
   data:
     mongodb:
       database: ${MONGODB_DATABASE}
@@ -28,6 +31,7 @@ spring:
       host: ${REDIS_HOST}
       port: ${REDIS_PORT}
       password: ${REDIS_PASSWORD}
+      database: 0
 
 
   ai:
@@ -35,7 +39,7 @@ spring:
       api-key: ${OPENAI_API_KEY}
       chat:
         options:
-          model: gpt-4o-mini # gpt-4o-mini
+          model: gpt-4o-mini
           temperature: 0.7
 
   jpa:
@@ -120,10 +124,3 @@ cloud:
       access-key: ${S3_ACCESSKEY}
       secret-key: ${S3_SECRETKEY}
 
----
-# 🔹 로컬 환경에서 `.env` 파일을 읽도록 설정 (필요한 경우만)
-spring:
-  config:
-    import: optional:file:.env[.properties]
-    activate:
-      on-profile: local
