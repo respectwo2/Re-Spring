@@ -1,0 +1,91 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/respring
+      SPRING_DATASOURCE_USERNAME: ssafy
+      SPRING_DATASOURCE_PASSWORD: ssafy
+      MONGODB_URI: mongodb://ssafy:ssafy@mongo-db:27017/respring?authSource=admin
+      MONGODB_DATABASE: respring
+      ELASTICSEARCH_URI: http://elasticsearch:9200
+      ELASTICSEARCH_USERNAME: elastic
+      ELASTICSEARCH_PASSWORD: changeme
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ssafy
+      S3_ACCESSKEY: dummy
+      S3_SECRETKEY: dummy
+      S3_BUCKET: dummy
+      S3_REGION: dummy
+      GOOGLE_CLIENT_ID: dummy
+      GOOGLE_CLIENT_SECRET: dummy
+      GOOGLE_REDIRECT_URI: http://localhost:8080/login/oauth2/code/google
+      KAKAO_CLIENT_ID: dummy
+      KAKAO_CLIENT_SECRET: dummy
+      KAKAO_REDIRECT_URI: http://localhost:8080/login/oauth2/code/kakao
+      OPENAI_API_KEY: dummy
+      MEDIASOUP_SERVER: dummy
+      MEDIASOUP_ANNOUNCED_IP: dummy
+    volumes:
+      - ~/.gradle:/home/gradle/.gradle
+    networks:
+      - project-network
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ssafy
+      MYSQL_DATABASE: respring
+      MYSQL_USER: ssafy
+      MYSQL_PASSWORD: ssafy
+      MYSQL_ROOT_HOST: "%"
+      TZ: Asia/Seoul
+
+    networks:
+      - project-network
+
+  mongo-db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    command: ["--noauth"]
+    networks:
+      - project-network
+
+
+  redis:
+    image: redis:latest
+    command: redis-server --requirepass ssafy --appendonly yes
+    ports:
+      - "6379:6379"
+
+    networks:
+      - project-network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.3
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=true
+      - ELASTIC_PASSWORD=changeme
+      - network.host=0.0.0.0
+      - http.host=0.0.0.0
+      - ES_JAVA_OPTS=-Xms1g -Xmx2g
+    ports:
+      - "9200:9200"
+    networks:
+      - project-network
+
+networks:
+  project-network:
+    driver: bridge
+
+
