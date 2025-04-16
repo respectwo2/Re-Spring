@@ -22,6 +22,7 @@ pipeline {
         S3_SECRETKEY = credentials('S3_SECRETKEY')
         S3_REGION = credentials('S3_REGION')
         NEXT_PUBLIC_API_BASE_URL = credentials('NEXT_PUBLIC_API_BASE_URL')
+        DOCKER_USERNAME = credentials('DOCKER_HUB_USERNAME')
     }
     stages {
         stage('Checkout') {
@@ -125,7 +126,7 @@ pipeline {
         }
     }
     post {
-        always {
+        success {
             script {
                 sh 'docker system prune -f'
             }
